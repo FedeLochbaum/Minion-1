@@ -9,21 +9,21 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Minion;
 import com.mygdx.game.Utils.Assets;
-import com.mygdx.game.Utils.GameState;
-import com.mygdx.game.Utils.PlayerState;
-import com.mygdx.game.Utils.RenderEngine;
-import com.mygdx.game.Utils.WorldUtil;
+import com.mygdx.game.Utils.States.GameState;
+import com.mygdx.game.Utils.States.PlayerState;
+import com.mygdx.game.RenderEngine;
+import com.mygdx.game.Utils.WorldEngine;
 
 import static com.mygdx.game.Utils.Constants.HEIGHT;
 import static com.mygdx.game.Utils.Constants.WIDTH;
-import static com.mygdx.game.Utils.GameState.GAME_PAUSED;
-import static com.mygdx.game.Utils.GameState.GAME_RUNNING;
+import static com.mygdx.game.Utils.States.GameState.GAME_PAUSED;
+import static com.mygdx.game.Utils.States.GameState.GAME_RUNNING;
 
 public class GameScreen extends ScreenAdapter {
 
     private Minion game;
 
-    WorldUtil worldutil;
+    WorldEngine worldutil;
     RenderEngine renderer;
 
     OrthographicCamera camera;
@@ -45,8 +45,9 @@ public class GameScreen extends ScreenAdapter {
         camera.position.set(WIDTH/2,HEIGHT/2,0);
         touchPoint = new Vector3();
 
-        worldutil = new WorldUtil();
+        worldutil = new WorldEngine();
         renderer = new RenderEngine(game.getBatch(), worldutil);
+
         state = GAME_RUNNING;
 
         scoreString = "SCORE: ";
@@ -132,7 +133,7 @@ public class GameScreen extends ScreenAdapter {
 
     private void renderScore(){
 //        Assets.getFont().setScale(0.6f);
-        Assets.getFont().draw(game.getBatch(), scoreString + worldutil.score, 10, 800-10);
+        Assets.getFont().draw(game.getBatch(), scoreString + worldutil.score, 10, 750);
     }
 
     @Override

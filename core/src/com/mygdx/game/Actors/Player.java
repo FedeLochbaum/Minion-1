@@ -1,6 +1,6 @@
 package com.mygdx.game.Actors;
 
-import com.mygdx.game.Utils.PlayerState;
+import com.mygdx.game.Utils.States.PlayerState;
 
 public class Player {
 

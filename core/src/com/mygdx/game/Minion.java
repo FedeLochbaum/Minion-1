@@ -8,7 +8,7 @@ import com.mygdx.game.Utils.Assets;
 
 public class Minion extends Game {
 
-	private Batch batch;
+	private SpriteBatch batch;
 
 	@Override
 	public void create() {
@@ -28,11 +28,11 @@ public class Minion extends Game {
 		getScreen().dispose();
 	}
 
-	public Batch getBatch() {
+	public SpriteBatch getBatch() {
 		return batch;
 	}
 
-	public void setBatch(Batch batch) {
+	public void setBatch(SpriteBatch batch) {
 		this.batch = batch;
 	}
 
