@@ -8,12 +8,15 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Minion;
+import com.mygdx.game.Utils.Assets;
 import com.mygdx.game.Utils.GameState;
+import com.mygdx.game.Utils.PlayerState;
 import com.mygdx.game.Utils.RenderEngine;
 import com.mygdx.game.Utils.WorldUtil;
 
 import static com.mygdx.game.Utils.Constants.HEIGHT;
 import static com.mygdx.game.Utils.Constants.WIDTH;
+import static com.mygdx.game.Utils.GameState.GAME_PAUSED;
 import static com.mygdx.game.Utils.GameState.GAME_RUNNING;
 
 public class GameScreen extends ScreenAdapter {
@@ -53,6 +56,7 @@ public class GameScreen extends ScreenAdapter {
         restartRectangle = new Rectangle(110, HEIGHT/2-(86/2), 260, 86);
         exitRectangle = new Rectangle(175, 330-(86/2), 137, 86);
     }
+
     public void draw(){
         GL20 gl = Gdx.gl;
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -68,27 +72,78 @@ public class GameScreen extends ScreenAdapter {
 
         switch(state){
             case GAME_RUNNING:
-//                renderScore();
-//                renderPauseBt();
+                renderScore();
+                renderPauseBt();
                 break;
             case GAME_PAUSED:
-//                renderPauseMenu();
+                renderPauseMenu();
                 break;
         }
-
         batch.end();
-
     }
 
     public void update(float delta){
         switch(state){
             case GAME_RUNNING:
-//                gameRunning(delta);
+                gameRunning(delta);
                 break;
             case GAME_PAUSED:
-//                gamePaused();
+                gamePaused();
                 break;
         }
+    }
+
+    public void gamePaused(){
+        if(Gdx.input.justTouched()){
+            camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+
+            if(resumeRectangle.contains(touchPoint.x, touchPoint.y))
+                state = GAME_RUNNING;
+
+            if(restartRectangle.contains(touchPoint.x, touchPoint.y)){
+                game.setScreen(new GameScreen(game));
+                return;
+            }
+            if(exitRectangle.contains(touchPoint.x, touchPoint.y)){
+                game.setScreen(new MenuScreen(game));
+                return;
+            }
+        }
+    }
+    public void gameRunning(float delta){
+        if(Gdx.input.justTouched()){
+            camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+            if(pauseRectangle.contains(touchPoint.x, touchPoint.y)){
+                state = GAME_PAUSED;
+                return;
+            }
+        }
+        worldutil.update(delta);
+        if(worldutil.player.getState() == PlayerState.STATE_DEAD) state = GAME_PAUSED;
+    }
+
+    private void renderPauseMenu(){
+        game.getBatch().draw(Assets.getResumeButton(), 135, 470-(86/2), 209, 86);
+    }
+
+    private void renderPauseBt() {
+        game.getBatch().draw(Assets.getPauseButton(), WIDTH-65, 1, 64, 64);
+    }
+
+    private void renderScore(){
+//        Assets.getFont().setScale(0.6f);
+        Assets.getFont().draw(game.getBatch(), scoreString + worldutil.score, 10, 800-10);
+    }
+
+    @Override
+    public void render(float delta) {
+        update(delta);
+        draw();
 
     }
+    @Override
+    public void pause() {
+        if(state == GAME_RUNNING) state = GAME_PAUSED;
+    }
+
 }

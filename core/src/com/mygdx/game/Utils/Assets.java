@@ -13,7 +13,7 @@ public class Assets {
     private static BitmapFont font;
     private static Music music;
 
-    private static TextureRegion bgRegion, soundOn, soundOff, playButton;
+    private static TextureRegion bgRegion, soundOn, soundOff, playButton, pauseButton, resumeButton, restartButton;
 
     public static void load(){
 
@@ -33,11 +33,12 @@ public class Assets {
         soundOn = new TextureRegion(items, 0, 0, 80, 80);
         soundOff = new TextureRegion(items, 80, 0, 80, 80);
         playButton = new TextureRegion(items, 104, 80, 104, 46);
+        resumeButton = new TextureRegion(items, 275, 0, 209, 86);
+        restartButton = new TextureRegion(items, 253, 86, 259, 86);
+        pauseButton = new TextureRegion(items, 160, 8, 64, 64);
 
-//        pauseBt = new TextureRegion(items, 160, 8, 64, 64);
+
 //        platform = new TextureRegion(items, 0, 172, 95, 20);
-//        resumeBt = new TextureRegion(items, 275, 0, 209, 86);
-//        restartBt = new TextureRegion(items, 253, 86, 259, 86);
 //        exitBt = new TextureRegion(items, 375, 172, 137, 86);
 //        char_inplatform = new Texture(Gdx.files.internal("data/p1_duck.png"));
 
@@ -131,5 +132,28 @@ public class Assets {
         Assets.playButton = playButton;
     }
 
+    public static TextureRegion getPauseButton() {
+        return pauseButton;
+    }
+
+    public static void setPauseButton(TextureRegion pauseButton) {
+        Assets.pauseButton = pauseButton;
+    }
+
+    public static TextureRegion getResumeButton() {
+        return resumeButton;
+    }
+
+    public static void setResumeButton(TextureRegion resumeButton) {
+        Assets.resumeButton = resumeButton;
+    }
+
+    public static TextureRegion getRestartButton() {
+        return restartButton;
+    }
+
+    public static void setRestartButton(TextureRegion restartButton) {
+        Assets.restartButton = restartButton;
+    }
 
 }
