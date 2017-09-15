@@ -34,6 +34,12 @@ public class Assets {
         soundOff = new TextureRegion(items, 80, 0, 80, 80);
         playButton = new TextureRegion(items, 104, 80, 104, 46);
 
+//        pauseBt = new TextureRegion(items, 160, 8, 64, 64);
+//        platform = new TextureRegion(items, 0, 172, 95, 20);
+//        resumeBt = new TextureRegion(items, 275, 0, 209, 86);
+//        restartBt = new TextureRegion(items, 253, 86, 259, 86);
+//        exitBt = new TextureRegion(items, 375, 172, 137, 86);
+//        char_inplatform = new Texture(Gdx.files.internal("data/p1_duck.png"));
 
     }
 

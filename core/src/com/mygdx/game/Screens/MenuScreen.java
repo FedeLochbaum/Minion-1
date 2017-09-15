@@ -18,8 +18,6 @@ public class MenuScreen extends ScreenAdapter {
 
     private Rectangle soundButton;
     private Rectangle playButton;
-    private Rectangle helpButton;
-    private Rectangle highscoreButton;
 
     public static boolean soundState = true;
 
@@ -32,10 +30,8 @@ public class MenuScreen extends ScreenAdapter {
         camera = new OrthographicCamera(WIDTH,HEIGHT);
         camera.position.set(WIDTH/2,HEIGHT/2,0);
 
-        soundButton = new Rectangle(400,0, 80, 80);
-        playButton = new Rectangle((480 / 2 - 104 / 2), 400, 104, 46);
-        helpButton = new Rectangle((480 / 2 - 104 / 2), 300, 104, 46);
-        highscoreButton = new Rectangle((480/2 - 104/2), 200, 204, 46);
+        soundButton = new Rectangle( 420, 0, 60, 80);
+        playButton = new Rectangle( 460/2 - Assets.getPlayButton().getRegionWidth()/2, 200, 150, 60);
         touchPoint = new Vector3();
     }
 
@@ -75,9 +71,9 @@ public class MenuScreen extends ScreenAdapter {
         if (Gdx.input.justTouched()) {
             camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
-//            if(playButton.contains(touchPoint.x, touchPoint.y)){
-//                game.setScreen(new GameScreen(game));
-//            }
+            if(playButton.contains(touchPoint.x, touchPoint.y)){
+                game.setScreen(new GameScreen(game));
+            }
 
             if(soundButton.contains(touchPoint.x, touchPoint.y)){
                 soundState = !soundState;
