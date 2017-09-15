@@ -55,14 +55,14 @@ public class MenuScreen extends ScreenAdapter {
         batch.disableBlending();
         batch.begin();
 
-        ((Batch) batch).draw(Assets.getBgRegion(), 0, 0, 480, 800);
+        batch.draw(Assets.getBgRegion(), 0, 0, 480, 800);
         batch.end();
 
         batch.enableBlending();
         batch.begin();
 
-        ((Batch) batch).draw(Assets.getPlayButton(), 460/2 - Assets.getPlayButton().getRegionWidth()/2, 200, 150, 60);
-        ((Batch) batch).draw(soundState ? Assets.getSoundOn() : Assets.getSoundOff(), 420, 0, 60, 80);
+        batch.draw(Assets.getPlayButton(), 460/2 - Assets.getPlayButton().getRegionWidth()/2, 200, 150, 60);
+        batch.draw(soundState ? Assets.getSoundOn() : Assets.getSoundOff(), 420, 0, 60, 80);
 
         batch.end();
     }
