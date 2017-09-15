@@ -10,6 +10,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Minion;
 import com.mygdx.game.Utils.Assets;
 
+import static com.mygdx.game.Utils.Constants.HEIGHT;
+import static com.mygdx.game.Utils.Constants.WIDTH;
+
 public class MenuScreen extends ScreenAdapter {
 
     private Minion game;
@@ -20,9 +23,6 @@ public class MenuScreen extends ScreenAdapter {
     private Rectangle playButton;
 
     public static boolean soundState = true;
-
-    private final float WIDTH = 480;
-    private final float HEIGHT = 800;
 
     public MenuScreen(Minion gameM) {
         game = gameM;
