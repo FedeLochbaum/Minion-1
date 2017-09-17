@@ -2,6 +2,7 @@ package com.mygdx.game.Utils;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Entities.Bird;
+import com.mygdx.game.Entities.Coin;
 import com.mygdx.game.Entities.Platform;
 import com.mygdx.game.Entities.Player;
 
@@ -23,7 +24,7 @@ public class WorldEngine {
 
     public final List<Platform> platforms;
     public final List<Bird> birds;
-//    public final List<Coin> coins;
+    public final List<Coin> coins;
     public final Random rand;
 
     public int score = 0;
@@ -34,7 +35,7 @@ public class WorldEngine {
         rand = new Random();
         platforms = new ArrayList<Platform>();
         birds = new ArrayList<Bird>();
-//        coins = new ArrayList<Coin>();
+        coins = new ArrayList<Coin>();
         player = new Player(10, 0);
         generateLevel();
         heightCam = 0;
@@ -69,9 +70,9 @@ public class WorldEngine {
     }
 
     private void updateCoins(float delta){
-//        for(Coin c : coins){
-//            c.update(delta);
-//        }
+        for(Coin c : coins){
+            c.update(delta);
+        }
     }
     private void generateLevel(){
 //        float y = rand.nextFloat() * (6f - 5f) + 5f;
@@ -132,15 +133,14 @@ public class WorldEngine {
         }
     }
     private void coinsCollisions(){
-//        int size = coins.size();
-//        for(int i=0;i<size;i++){
-//            Coin c = coins.get(i);
-//            if(c.bounds.overlaps(lame.bounds)){
-//                score += Coin.POINTS;
-//                coins.remove(c);
-//                size = coins.size();
-//            }
-//        }
+        int size = coins.size();
+        for(Coin c : coins) {
+            if(c.bounds.overlaps(player.bounds)){
+                score += Coin.POINTS;
+                coins.remove(c);
+                size = coins.size();
+            }
+        }
     }
 
     public Player getPlayer() {
