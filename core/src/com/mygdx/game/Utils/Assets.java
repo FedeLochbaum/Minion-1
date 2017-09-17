@@ -8,20 +8,20 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
 
-    private static Texture background, items, player, bird, coin;
+    private static Texture background, items;
 
     private static BitmapFont font;
     private static Music music;
 
-    private static TextureRegion bgRegion, soundOn, soundOff, playButton, pauseButton, resumeButton, restartButton, platform;
+    private static TextureRegion bgRegion, soundOn, soundOff, playButton, pauseButton, resumeButton, restartButton, platform, coin, bird, player;
 
     public static void load(){
 
         background = new Texture(Gdx.files.internal("data/background.png"));
         items = new Texture(Gdx.files.internal("data/items.png"));
-        player = new Texture(Gdx.files.internal("data/player.png"));
-        bird = new Texture(Gdx.files.internal("data/bird.png"));
-        coin = new Texture(Gdx.files.internal("data/coin.png"));
+        player = new TextureRegion(new Texture(Gdx.files.internal("data/player.png")));
+        bird = new TextureRegion(new Texture(Gdx.files.internal("data/bird.png")));
+        coin = new TextureRegion(new Texture(Gdx.files.internal("data/coin.png")));
 
         font = new BitmapFont(Gdx.files.internal("font/font.fnt"));
 
@@ -59,27 +59,27 @@ public class Assets {
         Assets.items = items;
     }
 
-    public static Texture getPlayer() {
+    public static TextureRegion getPlayer() {
         return player;
     }
 
-    public static void setPlayer(Texture player) {
+    public static void setPlayer(TextureRegion player) {
         Assets.player = player;
     }
 
-    public static Texture getBird() {
+    public static TextureRegion getBird() {
         return bird;
     }
 
-    public static void setBird(Texture bird) {
+    public static void setBird(TextureRegion bird) {
         Assets.bird = bird;
     }
 
-    public static Texture getCoin() {
+    public static TextureRegion getCoin() {
         return coin;
     }
 
-    public static void setCoin(Texture coin) {
+    public static void setCoin(TextureRegion coin) {
         Assets.coin = coin;
     }
 

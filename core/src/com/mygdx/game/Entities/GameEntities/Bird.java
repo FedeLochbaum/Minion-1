@@ -42,4 +42,20 @@ public class Bird extends com.mygdx.game.Entities.LogicEntities.MovementComponen
 
         stateTime += delta;
     }
+
+    public BirdState getState() {
+        return state;
+    }
+
+    public void setState(BirdState state) {
+        this.state = state;
+    }
+
+    public BirdType getType() {
+        return type;
+    }
+
+    public void setType(BirdType type) {
+        this.type = type;
+    }
 }
