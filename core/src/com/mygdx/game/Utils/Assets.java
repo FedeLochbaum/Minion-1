@@ -13,7 +13,7 @@ public class Assets {
     private static BitmapFont font;
     private static Music music;
 
-    private static TextureRegion bgRegion, soundOn, soundOff, playButton, pauseButton, resumeButton, restartButton;
+    private static TextureRegion bgRegion, soundOn, soundOff, playButton, pauseButton, resumeButton, restartButton, platform;
 
     public static void load(){
 
@@ -36,9 +36,8 @@ public class Assets {
         resumeButton = new TextureRegion(items, 275, 0, 209, 86);
         restartButton = new TextureRegion(items, 253, 86, 259, 86);
         pauseButton = new TextureRegion(items, 160, 8, 64, 64);
+        platform = new TextureRegion(items, 0, 172, 95, 20);
 
-
-//        platform = new TextureRegion(items, 0, 172, 95, 20);
 //        exitBt = new TextureRegion(items, 375, 172, 137, 86);
 //        char_inplatform = new Texture(Gdx.files.internal("data/p1_duck.png"));
 
@@ -152,8 +151,14 @@ public class Assets {
         return restartButton;
     }
 
-    public static void setRestartButton(TextureRegion restartButton) {
-        Assets.restartButton = restartButton;
+    public static void setPlatform(TextureRegion platform2) {
+        Assets.platform = platform2;
     }
+
+    public static TextureRegion getPlatform() {
+        return platform;
+    }
+
+
 
 }
