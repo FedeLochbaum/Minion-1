@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Animations.BirdAnimation;
+import com.mygdx.game.Animations.CoinAnimation;
+import com.mygdx.game.Animations.PlayerAnimation;
 import com.mygdx.game.Entities.GameEntities.Bird;
 import com.mygdx.game.Entities.GameEntities.Coin;
 import com.mygdx.game.Entities.GameEntities.Platform;
@@ -23,9 +26,9 @@ public class RenderEngine {
     WorldEngine world;
     OrthographicCamera cam;
     SpriteBatch batch;
-//    PlayerAnimation player;
-//    BirdAnimation bird;
-//    CoinAnimation coin;
+    PlayerAnimation player;
+    BirdAnimation bird;
+    CoinAnimation coin;
     ShapeRenderer sr;
 
     int side = 1;
@@ -36,9 +39,9 @@ public class RenderEngine {
         cam = new OrthographicCamera(WIDTH, HEIGHT);
         cam.position.set(WIDTH/2, HEIGHT/2, 0);
         batch = batchC;
-//        player = new PlayerAnimation();
-//        bird = new BirdAnimation();
-//        coin = new CoinAnimation();
+        player = new PlayerAnimation();
+        bird = new BirdAnimation();
+        coin = new CoinAnimation();
         sr = new ShapeRenderer();
     }
 
@@ -69,18 +72,18 @@ public class RenderEngine {
     }
 
     private void renderCoins(){
-        TextureRegion coinFrame = Assets.getCoin();
+        TextureRegion coinFrame;
         for(Coin c : world.coins){
-//            coinFrame = coin.coinAnimation.getKeyFrame(c.stateTime, true);
+            coinFrame = coin.coinAnimation.getKeyFrame(c.getStateTime(), true);
             batch.draw(coinFrame, c.position.x, c.position.y, Coin.WIDTH, Coin.HEIGHT);
         }
     }
 
     private void renderBirds(){
-        TextureRegion birdFrame = Assets.getBird();
+        TextureRegion birdFrame;
         for(Bird b : world.birds){
-//            if(b.getState() == STATE_DEAD) birdFrame = bird.dieFrames;
-//            else birdFrame = bird.flyAnimation.getKeyFrame(b.stateTime, true);
+            if(b.getState().equals(STATE_DEAD)) birdFrame = bird.dieFrames;
+            else birdFrame = bird.flyAnimation.getKeyFrame(b.getStateTime(), true);
             int side = 1;
             if(b.getType() == TYPE_RIGHT) side = -1;
             batch.draw(birdFrame, b.position.x-Bird.WIDTH/2, b.position.y-Bird.HEIGHT/2,
@@ -105,17 +108,17 @@ public class RenderEngine {
     }
 
     private void renderCharacter() {
-        TextureRegion currentFrame = Assets.getPlayer();
+        TextureRegion currentFrame;
         Player player = world.getPlayer();
         switch(player.getState()){
             case STATE_JUMP:
-//                currentFrame = player.jump;
+                currentFrame = player.jump;
                 break;
             case STATE_INGROUND:
-//                currentFrame = player.platformAnimation.getKeyFrame(player.stateTime, false);
+                currentFrame = player.platformAnimation.getKeyFrame(player.getStateTime(), false);
                 break;
             default:
-//                currentFrame = player.fall;
+                currentFrame = player.fall;
                 break;
         }
         if(player.velocity.x > 0) side = 1;

@@ -58,4 +58,12 @@ public class Bird extends com.mygdx.game.Entities.LogicEntities.MovementComponen
     public void setType(BirdType type) {
         this.type = type;
     }
+
+    public float getStateTime() {
+        return stateTime;
+    }
+
+    public void setStateTime(float stateTime) {
+        this.stateTime = stateTime;
+    }
 }

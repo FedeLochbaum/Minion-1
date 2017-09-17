@@ -17,6 +17,7 @@ public class Player extends com.mygdx.game.Entities.LogicEntities.MovementCompon
     public static final float HEIGHT = 3f;
 
     PlayerState state;
+
     float stateTime = 0;
 
     public Player(float x, float y){
@@ -85,4 +86,11 @@ public class Player extends com.mygdx.game.Entities.LogicEntities.MovementCompon
         this.state = state;
     }
 
+    public float getStateTime() {
+        return stateTime;
+    }
+
+    public void setStateTime(float stateTime) {
+        this.stateTime = stateTime;
+    }
 }
