@@ -12,6 +12,7 @@ public class PlayerAnimation {
 
     Animation walkAnimation;
     Animation platformAnimation;
+
     TextureRegion[][] frames;
     TextureRegion[] walkFrames;
     TextureRegion standby;
@@ -33,5 +34,69 @@ public class PlayerAnimation {
         platformFrames[0] = new TextureRegion(Assets.getChar_inplatform(), 0, 0, 69, 71);
         platformFrames[1] = standby;
         platformAnimation = new Animation(1f, platformFrames);
+    }
+
+    public Animation getWalkAnimation() {
+        return walkAnimation;
+    }
+
+    public void setWalkAnimation(Animation walkAnimation) {
+        this.walkAnimation = walkAnimation;
+    }
+
+    public Animation getPlatformAnimation() {
+        return platformAnimation;
+    }
+
+    public void setPlatformAnimation(Animation platformAnimation) {
+        this.platformAnimation = platformAnimation;
+    }
+
+    public TextureRegion[][] getFrames() {
+        return frames;
+    }
+
+    public void setFrames(TextureRegion[][] frames) {
+        this.frames = frames;
+    }
+
+    public TextureRegion[] getWalkFrames() {
+        return walkFrames;
+    }
+
+    public void setWalkFrames(TextureRegion[] walkFrames) {
+        this.walkFrames = walkFrames;
+    }
+
+    public TextureRegion getStandby() {
+        return standby;
+    }
+
+    public void setStandby(TextureRegion standby) {
+        this.standby = standby;
+    }
+
+    public TextureRegion getJump() {
+        return jump;
+    }
+
+    public void setJump(TextureRegion jump) {
+        this.jump = jump;
+    }
+
+    public TextureRegion getFall() {
+        return fall;
+    }
+
+    public void setFall(TextureRegion fall) {
+        this.fall = fall;
+    }
+
+    public TextureRegion[] getPlatformFrames() {
+        return platformFrames;
+    }
+
+    public void setPlatformFrames(TextureRegion[] platformFrames) {
+        this.platformFrames = platformFrames;
     }
 }

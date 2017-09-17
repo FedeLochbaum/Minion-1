@@ -143,7 +143,8 @@ public class WorldEngine {
     }
     private void coinsCollisions(){
         int size = coins.size();
-        for(Coin c : coins) {
+        for(int i=0;i<size;i++){
+            Coin c = coins.get(i);
             if(c.bounds.overlaps(player.bounds)){
                 score += Coin.POINTS;
                 coins.remove(c);

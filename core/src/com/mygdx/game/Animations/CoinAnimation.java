@@ -9,6 +9,7 @@ public class CoinAnimation {
 
     TextureRegion[] coinFrames;
     Animation coinAnimation;
+
     public CoinAnimation(){
         coinFrames = new TextureRegion[4];
         Texture coinAsset = Assets.getCoin();
@@ -18,4 +19,21 @@ public class CoinAnimation {
         coinFrames[3] = new TextureRegion(coinAsset, 0, 132, 40, 43);
         coinAnimation = new Animation(0.2f, coinFrames);
     }
+
+    public TextureRegion[] getCoinFrames() {
+        return coinFrames;
+    }
+
+    public void setCoinFrames(TextureRegion[] coinFrames) {
+        this.coinFrames = coinFrames;
+    }
+
+    public Animation getCoinAnimation() {
+        return coinAnimation;
+    }
+
+    public void setCoinAnimation(Animation coinAnimation) {
+        this.coinAnimation = coinAnimation;
+    }
 }
+
