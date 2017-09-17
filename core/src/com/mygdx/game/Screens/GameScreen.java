@@ -120,7 +120,7 @@ public class GameScreen extends ScreenAdapter {
             }
         }
         worldutil.update(delta);
-        if(worldutil.player.getState() == PlayerState.STATE_DEAD) state = GAME_PAUSED;
+        if(worldutil.getPlayer().getState() == PlayerState.STATE_DEAD) state = GAME_PAUSED;
     }
 
     private void renderPauseMenu(){

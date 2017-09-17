@@ -1,9 +1,15 @@
 package com.mygdx.game.Utils;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Actors.Player;
+import com.mygdx.game.Entities.Bird;
+import com.mygdx.game.Entities.Platform;
+import com.mygdx.game.Entities.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import static com.mygdx.game.Utils.States.PlayerState.STATE_JUMP;
 
 public class WorldEngine {
 
@@ -15,26 +21,26 @@ public class WorldEngine {
 
     private final Player player;
 
-//    public final List<Platform> platforms;
-//    public final List<Bird> birds;
+    public final List<Platform> platforms;
+    public final List<Bird> birds;
 //    public final List<Coin> coins;
-//    public final Random rand;
+    public final Random rand;
 
     public int score = 0;
     public float heightCam;
 
 
     public WorldEngine(){
-//        rand = new Random();
-//        platforms = new ArrayList<Platform>();
-//        birds = new ArrayList<Bird>();
+        rand = new Random();
+        platforms = new ArrayList<Platform>();
+        birds = new ArrayList<Bird>();
 //        coins = new ArrayList<Coin>();
         player = new Player(10, 0);
         generateLevel();
         heightCam = 0;
     }
     public void update(float delta){
-        updateLame(delta);
+        updatePlayer(delta);
         updatePlatforms(delta);
         updateBirds(delta);
         updateCoins(delta);
@@ -45,22 +51,23 @@ public class WorldEngine {
         birdsCollisions();
         coinsCollisions();
     }
-    private void updateLame(float delta){
-//        lame.update(delta);
-//        heightCam = Math.max(heightCam, lame.position.y);
-//        lameDead();
+    private void updatePlayer(float delta){
+        player.update(delta);
+        heightCam = Math.max(heightCam, player.position.y);
+        playerDead();
     }
     private void updatePlatforms(float delta){
-//        for(Platform p : platforms){
-//            p.update(delta);
-//        }
+        for(Platform p : platforms){
+            p.update(delta);
+        }
     }
 
-    private void updateBirds(float delta){
-//        for(Bird b : birds){
-//            b.update(delta);
-//        }
+    private void updateBirds(float delta) {
+        for(Bird b : birds){
+            b.update(delta);
+        }
     }
+
     private void updateCoins(float delta){
 //        for(Coin c : coins){
 //            c.update(delta);
@@ -98,31 +105,31 @@ public class WorldEngine {
 //        }
     }
 
-    private void lameDead(){
-//        if(heightCam - WorldRender.HEIGHT/2 > lame.position.y+Lame.HEIGHT) lame.dead();
+    private void playerDead(){
+        if(heightCam - WorldEngine.HEIGHT/2 > player.position.y+player.HEIGHT) player.dead();
     }
 
     private void birdsCollisions(){
-//        for(Bird b : birds){
-//            if(b.bounds.overlaps(lame.bounds)){
-//                if(lame.position.y > b.position.y){
-//                    lame.hitBird();
-//                    score = score*2;
-//                }
-//                else lame.dead();
-//            }
-//        }
+        for(Bird b : birds){
+            if(b.bounds.overlaps(player.bounds)){
+                if(player.position.y > b.position.y){
+                    player.hitBird();
+                    score = score*2;
+                }
+                else player.dead();
+            }
+        }
     }
     private void platformsCollisions(){
-//        if(lame.state == Lame.STATE_JUMP) return;
-//        for(Platform p : platforms){
-//            if(p.bounds.overlaps(lame.bounds) && lame.position.y > p.position.y){
-//                if(lame.position.x+1f < p.bounds.x + Platform.WIDTH){
-//                    lame.hitPlatform(p);
-//                    break;
-//                }
-//            }
-//        }
+        if(player.getState() == STATE_JUMP) return;
+        for(Platform p : platforms){
+            if(p.bounds.overlaps(player.bounds) && player.position.y > p.position.y){
+                if(player.position.x+1f < p.bounds.x + Platform.WIDTH){
+                    player.hitPlatform(p);
+                    break;
+                }
+            }
+        }
     }
     private void coinsCollisions(){
 //        int size = coins.size();
