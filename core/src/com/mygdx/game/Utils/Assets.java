@@ -8,20 +8,20 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
 
-    private static Texture background, items;
+    private static Texture background, items, player, bird, coin, char_inplatform;
 
     private static BitmapFont font;
     private static Music music;
 
-    private static TextureRegion bgRegion, soundOn, soundOff, playButton, pauseButton, resumeButton, restartButton, platform, coin, bird, player;
+    private static TextureRegion bgRegion, soundOn, soundOff, playButton, pauseButton, resumeButton, restartButton, platform;
 
     public static void load(){
 
         background = new Texture(Gdx.files.internal("data/background.png"));
         items = new Texture(Gdx.files.internal("data/items.png"));
-        player = new TextureRegion(new Texture(Gdx.files.internal("data/player.png")));
-        bird = new TextureRegion(new Texture(Gdx.files.internal("data/bird.png")));
-        coin = new TextureRegion(new Texture(Gdx.files.internal("data/coin.png")));
+        player = new Texture(Gdx.files.internal("data/player.png"));
+        bird = new Texture(Gdx.files.internal("data/bird.png"));
+        coin = new Texture(Gdx.files.internal("data/coin.png"));
 
         font = new BitmapFont(Gdx.files.internal("font/font.fnt"));
 
@@ -39,7 +39,7 @@ public class Assets {
         platform = new TextureRegion(items, 0, 172, 95, 20);
 
 //        exitBt = new TextureRegion(items, 375, 172, 137, 86);
-//        char_inplatform = new Texture(Gdx.files.internal("data/p1_duck.png"));
+        char_inplatform = new Texture(Gdx.files.internal("data/p1_duck.png"));
 
     }
 
@@ -59,27 +59,27 @@ public class Assets {
         Assets.items = items;
     }
 
-    public static TextureRegion getPlayer() {
+    public static Texture getPlayer() {
         return player;
     }
 
-    public static void setPlayer(TextureRegion player) {
+    public static void setPlayer(Texture player) {
         Assets.player = player;
     }
 
-    public static TextureRegion getBird() {
+    public static Texture getBird() {
         return bird;
     }
 
-    public static void setBird(TextureRegion bird) {
+    public static void setBird(Texture bird) {
         Assets.bird = bird;
     }
 
-    public static TextureRegion getCoin() {
+    public static Texture getCoin() {
         return coin;
     }
 
-    public static void setCoin(TextureRegion coin) {
+    public static void setCoin(Texture coin) {
         Assets.coin = coin;
     }
 
@@ -159,6 +159,13 @@ public class Assets {
         return platform;
     }
 
+    public static Texture getChar_inplatform() {
+        return char_inplatform;
+    }
+
+    public static void setChar_inplatform(Texture char_inplatform) {
+        Assets.char_inplatform = char_inplatform;
+    }
 
 
 }
