@@ -5,12 +5,17 @@ import com.mygdx.game.Entities.Bird;
 import com.mygdx.game.Entities.Coin;
 import com.mygdx.game.Entities.Platform;
 import com.mygdx.game.Entities.Player;
+import com.mygdx.game.Utils.Types.BirdType;
+import com.mygdx.game.Utils.Types.PlatformType;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import static com.mygdx.game.Utils.States.PlayerState.STATE_JUMP;
+import static com.mygdx.game.Utils.Types.PlatformType.TYPE_MOVING_X;
+import static com.mygdx.game.Utils.Types.PlatformType.TYPE_MOVING_Y;
+import static com.mygdx.game.Utils.Types.PlatformType.TYPE_STATIC;
 
 public class WorldEngine {
 
@@ -75,35 +80,39 @@ public class WorldEngine {
         }
     }
     private void generateLevel(){
-//        float y = rand.nextFloat() * (6f - 5f) + 5f;
-//        while(y < HEIGHT){
-//            int type;
-//            float r = rand.nextFloat();
-//            if(r > 0.8f) type = Platform.TYPE_MOVING_Y;
-//            else if(r > 0.5f) type = Platform.TYPE_MOVING_X;
-//            else type = Platform.TYPE_STATIC;
-//            float x = rand.nextFloat()*(WIDTH-Platform.WIDTH)+1;
-//            if(type == Platform.TYPE_MOVING_Y) y += rand.nextFloat()*2;
-//            Platform p = new Platform(x, y, type);
-//            platforms.add(p);
-//
-//
-//
-//            // add coins
-//            if(rand.nextFloat() > 0.5f){
-//                Coin c = new Coin(p.position.x+rand.nextFloat(), p.position.y+Coin.HEIGHT+rand.nextFloat()*3);
-//                coins.add(c);
-//            }
-//
-//            // add birds
-//            if(rand.nextFloat() > 0.5f){
-//                Bird b = new Bird(p.position.x+rand.nextFloat(), p.position.y+Bird.HEIGHT+rand.nextFloat()*3, rand.nextInt(2));
-//                birds.add(b);
-//            }
-//
-//            y += rand.nextFloat() * (6f - 3f) + 3f;
-//
-//        }
+        float y = rand.nextFloat() * (6f - 5f) + 5f;
+
+        while(y < HEIGHT) {
+            PlatformType type;
+
+            float r = rand.nextFloat();
+
+            if(r > 0.8f) type = TYPE_MOVING_Y;
+            else if(r > 0.5f) type = TYPE_MOVING_X;
+            else type = TYPE_STATIC;
+            float x = rand.nextFloat()*(WIDTH-Platform.WIDTH)+1;
+            if(type == TYPE_MOVING_Y) y += rand.nextFloat()*2;
+            Platform p = new Platform(x, y, type);
+            platforms.add(p);
+
+
+            if(rand.nextFloat() > 0.5f){
+                Coin c = new Coin(p.position.x+rand.nextFloat(), p.position.y+Coin.HEIGHT+rand.nextFloat()*3);
+                coins.add(c);
+            }
+
+            if(rand.nextFloat() > 0.5f){
+                BirdType birdType = BirdType.TYPE_LEFT;
+                if(rand.nextInt(2) == 2)
+                    birdType = BirdType.TYPE_RIGHT;
+
+                Bird b = new Bird(p.position.x+rand.nextFloat(), p.position.y+Bird.HEIGHT+rand.nextFloat()*3, birdType);
+                birds.add(b);
+            }
+
+            y += rand.nextFloat() * (6f - 3f) + 3f;
+
+        }
     }
 
     private void playerDead(){
