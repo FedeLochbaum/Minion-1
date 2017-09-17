@@ -1,10 +1,10 @@
-package com.mygdx.game.Utils;
+package com.mygdx.game.World;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Entities.Bird;
-import com.mygdx.game.Entities.Coin;
-import com.mygdx.game.Entities.Platform;
-import com.mygdx.game.Entities.Player;
+import com.mygdx.game.Entities.GameEntities.Bird;
+import com.mygdx.game.Entities.GameEntities.Coin;
+import com.mygdx.game.Entities.GameEntities.Platform;
+import com.mygdx.game.Entities.GameEntities.Player;
 import com.mygdx.game.Utils.Types.BirdType;
 import com.mygdx.game.Utils.Types.PlatformType;
 

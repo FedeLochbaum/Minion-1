@@ -1,14 +1,14 @@
-package com.mygdx.game.Entities;
+package com.mygdx.game.Entities.GameEntities;
 
 import com.mygdx.game.Utils.States.BirdState;
 import com.mygdx.game.Utils.Types.BirdType;
-import com.mygdx.game.Utils.WorldEngine;
+import com.mygdx.game.World.WorldEngine;
 
 import static com.mygdx.game.Utils.States.BirdState.STATE_FLY;
 import static com.mygdx.game.Utils.Types.BirdType.TYPE_LEFT;
 import static com.mygdx.game.Utils.Types.BirdType.TYPE_RIGHT;
 
-public class Bird extends MovementComponent {
+public class Bird extends com.mygdx.game.Entities.LogicEntities.MovementComponent {
 
     public static final float WIDTH = 1.8f;
     public static final float HEIGHT = 1.5f;

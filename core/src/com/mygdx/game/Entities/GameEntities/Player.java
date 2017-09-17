@@ -1,16 +1,16 @@
-package com.mygdx.game.Entities;
+package com.mygdx.game.Entities.GameEntities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.mygdx.game.Utils.States.PlayerState;
-import com.mygdx.game.Utils.WorldEngine;
+import com.mygdx.game.World.WorldEngine;
 
 import static com.mygdx.game.Utils.States.PlayerState.STATE_DEAD;
 import static com.mygdx.game.Utils.States.PlayerState.STATE_FALL;
 import static com.mygdx.game.Utils.States.PlayerState.STATE_INGROUND;
 import static com.mygdx.game.Utils.States.PlayerState.STATE_JUMP;
 
-public class Player extends MovementComponent {
+public class Player extends com.mygdx.game.Entities.LogicEntities.MovementComponent {
 
     public static final float JUMP_VELOCITY = 11f;
     public static final float WIDTH = 2.4f;

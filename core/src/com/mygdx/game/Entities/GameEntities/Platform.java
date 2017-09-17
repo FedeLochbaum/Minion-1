@@ -1,13 +1,13 @@
-package com.mygdx.game.Entities;
+package com.mygdx.game.Entities.GameEntities;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Utils.Types.PlatformType;
-import com.mygdx.game.Utils.WorldEngine;
+import com.mygdx.game.World.WorldEngine;
 
 import static com.mygdx.game.Utils.Types.PlatformType.TYPE_MOVING_X;
 import static com.mygdx.game.Utils.Types.PlatformType.TYPE_MOVING_Y;
 
-public class Platform extends MovementComponent {
+public class Platform extends com.mygdx.game.Entities.LogicEntities.MovementComponent {
 
     public static final float WIDTH = 3.16f;
     public static final float HEIGHT = 0.67f;

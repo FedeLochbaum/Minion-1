@@ -11,8 +11,8 @@ import com.mygdx.game.Minion;
 import com.mygdx.game.Utils.Assets;
 import com.mygdx.game.Utils.States.GameState;
 import com.mygdx.game.Utils.States.PlayerState;
-import com.mygdx.game.RenderEngine;
-import com.mygdx.game.Utils.WorldEngine;
+import com.mygdx.game.World.RenderEngine;
+import com.mygdx.game.World.WorldEngine;
 
 import static com.mygdx.game.Utils.Constants.HEIGHT;
 import static com.mygdx.game.Utils.Constants.WIDTH;

@@ -1,15 +1,11 @@
-package com.mygdx.game;
+package com.mygdx.game.World;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Entities.Platform;
-import com.mygdx.game.Entities.Player;
 import com.mygdx.game.Utils.Assets;
-import com.mygdx.game.Utils.WorldEngine;
 
 public class RenderEngine {
 
