@@ -1,10 +1,8 @@
 package com.mygdx.game.World;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Animations.BirdAnimation;
 import com.mygdx.game.Animations.CoinAnimation;
@@ -30,7 +28,6 @@ public class RenderEngine {
     private PlayerAnimation playerAnimation;
     private BirdAnimation birdAnimation;
     private CoinAnimation coinAnimation;
-    private ShapeRenderer shapeRenderer;
 
     private int side = 1;
 
@@ -45,7 +42,6 @@ public class RenderEngine {
         playerAnimation = new PlayerAnimation();
         birdAnimation = new BirdAnimation();
         coinAnimation = new CoinAnimation();
-        shapeRenderer = new ShapeRenderer();
     }
 
     public void render() {
@@ -62,16 +58,6 @@ public class RenderEngine {
         renderBirds();
         renderCoins();
         batch.end();
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.RED);
-
-        for(Bird b : world.birds){
-            shapeRenderer.rect(playerPosition.x, playerPosition.y, world.getPlayer().bounds.width, world.getPlayer().bounds.height);
-            shapeRenderer.rect(b.bounds.x, b.bounds.y, b.bounds.width, b.bounds.height);
-        }
-
-        shapeRenderer.rect(playerPosition.x, playerPosition.y, world.getPlayer().bounds.width, world.getPlayer().bounds.height);
-        shapeRenderer.end();
     }
 
     private void renderCoins(){
