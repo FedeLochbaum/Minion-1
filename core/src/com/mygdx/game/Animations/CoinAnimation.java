@@ -7,8 +7,8 @@ import com.mygdx.game.Utils.Assets;
 
 public class CoinAnimation {
 
-    TextureRegion[] coinFrames;
-    Animation coinAnimation;
+    private TextureRegion[] coinFrames;
+    private Animation coinAnimation;
 
     public CoinAnimation(){
         coinFrames = new TextureRegion[4];

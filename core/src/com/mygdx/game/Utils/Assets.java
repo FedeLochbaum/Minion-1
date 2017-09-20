@@ -40,7 +40,6 @@ public class Assets {
 
         exitButton = new TextureRegion(items, 375, 172, 137, 86);
         char_inplatform = new Texture(Gdx.files.internal("data/p1_duck.png"));
-
     }
 
     public static Texture getBackground() {

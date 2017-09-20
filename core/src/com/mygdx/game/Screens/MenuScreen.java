@@ -22,6 +22,8 @@ public class MenuScreen extends ScreenAdapter {
     private Rectangle soundButton;
     private Rectangle playButton;
 
+    private Batch batch;
+
     public static boolean soundState = true;
 
     public MenuScreen(Minion gameM) {
@@ -33,6 +35,8 @@ public class MenuScreen extends ScreenAdapter {
         soundButton = new Rectangle( 420, 0, 60, 80);
         playButton = new Rectangle( 460/2 - Assets.getPlayButton().getRegionWidth()/2, 200, 150, 60);
         touchPoint = new Vector3();
+
+        batch = game.getBatch();
     }
 
     @Override
@@ -47,8 +51,6 @@ public class MenuScreen extends ScreenAdapter {
         gl.glClearColor(1, 0, 0, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
-
-        Batch batch = game.getBatch();
 
         batch.setProjectionMatrix(camera.combined);
 

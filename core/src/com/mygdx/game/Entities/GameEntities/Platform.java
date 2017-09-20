@@ -11,10 +11,10 @@ public class Platform extends com.mygdx.game.Entities.LogicEntities.MovementComp
 
     public static final float WIDTH = 3.16f;
     public static final float HEIGHT = 0.67f;
-    public static final float VELOCITY = 2.5f;
+    private static final float VELOCITY = 2.5f;
 
-    PlatformType type;
-    float stateTime = 0;
+    private PlatformType type;
+    private float stateTime = 0;
 
     private Vector2 origin;
     private boolean flip = false;
@@ -43,6 +43,7 @@ public class Platform extends com.mygdx.game.Entities.LogicEntities.MovementComp
         }
 
         position.add(velocity.x * delta, velocity.y * delta);
+
         stateTime += delta;
     }
 }

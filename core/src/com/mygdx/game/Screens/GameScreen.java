@@ -23,24 +23,24 @@ public class GameScreen extends ScreenAdapter {
 
     private Minion game;
 
-    WorldEngine worldEngine;
-    RenderEngine worldRenderer;
-    OrthographicCamera camera;
+    private WorldEngine worldEngine;
+    private RenderEngine worldRenderer;
+    private OrthographicCamera camera;
 
-    Vector3 touchPoint;
+    private Vector3 touchPoint;
 
-    GameState state;
+    private GameState state;
 
-    String scoreString;
+    private String scoreString;
 
-    Batch batch;
+    private Batch batch;
 
-    Rectangle pauseRectangle;
-    Rectangle resumeRectangle;
+    private Rectangle pauseRectangle;
+    private Rectangle resumeRectangle;
 
 
-    Rectangle restartRectangle;
-    Rectangle exitRectangle;
+    private Rectangle restartRectangle;
+    private Rectangle exitRectangle;
 
     public GameScreen(Minion gameM) {
         game = gameM;
@@ -140,17 +140,17 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void renderPauseMenu(){
-        game.getBatch().draw(Assets.getResumeButton(), 135, 470-(86/2), 209, 86);
+        batch.draw(Assets.getResumeButton(), 135, 470-(86/2), 209, 86);
         batch.draw(Assets.getRestartButton(), 110, HEIGHT/2-(86/2), 260, 86);
         batch.draw(Assets.getExitButton(), 175, 330-(86/2), 137, 86);
     }
 
     private void renderPauseBt() {
-        game.getBatch().draw(Assets.getPauseButton(), WIDTH-65, 1, 64, 64);
+        batch.draw(Assets.getPauseButton(), WIDTH-65, 1, 64, 64);
     }
 
     private void renderScore(){
-        Assets.getFont().draw(game.getBatch(), scoreString + worldEngine.score, 10, 750);
+        Assets.getFont().draw(batch, scoreString + worldEngine.score, 10, 750);
     }
 
     @Override

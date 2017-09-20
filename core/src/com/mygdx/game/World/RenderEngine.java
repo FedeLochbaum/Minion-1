@@ -23,26 +23,29 @@ public class RenderEngine {
     static final float WIDTH = 16;
     static final float HEIGHT = 26;
 
-    WorldEngine world;
-    OrthographicCamera cam;
-    SpriteBatch batch;
-    PlayerAnimation player;
-    BirdAnimation bird;
-    CoinAnimation coin;
-    ShapeRenderer sr;
+    private WorldEngine world;
+    private OrthographicCamera cam;
+    private SpriteBatch batch;
 
-    int side = 1;
+    private PlayerAnimation playerAnimation;
+    private BirdAnimation birdAnimation;
+    private CoinAnimation coinAnimation;
+    private ShapeRenderer shapeRenderer;
+
+    private int side = 1;
 
 
     public RenderEngine(SpriteBatch batchC, WorldEngine worldE) {
+
         world = worldE;
         cam = new OrthographicCamera(WIDTH, HEIGHT);
         cam.position.set(WIDTH/2, HEIGHT/2, 0);
         batch = batchC;
-        player = new PlayerAnimation();
-        bird = new BirdAnimation();
-        coin = new CoinAnimation();
-        sr = new ShapeRenderer();
+
+        playerAnimation = new PlayerAnimation();
+        birdAnimation = new BirdAnimation();
+        coinAnimation = new CoinAnimation();
+        shapeRenderer = new ShapeRenderer();
     }
 
     public void render() {
@@ -59,22 +62,22 @@ public class RenderEngine {
         renderBirds();
         renderCoins();
         batch.end();
-        sr.begin(ShapeRenderer.ShapeType.Line);
-        sr.setColor(Color.RED);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(Color.RED);
 
         for(Bird b : world.birds){
-            sr.rect(playerPosition.x, playerPosition.y, world.getPlayer().bounds.width, world.getPlayer().bounds.height);
-            sr.rect(b.bounds.x, b.bounds.y, b.bounds.width, b.bounds.height);
+            shapeRenderer.rect(playerPosition.x, playerPosition.y, world.getPlayer().bounds.width, world.getPlayer().bounds.height);
+            shapeRenderer.rect(b.bounds.x, b.bounds.y, b.bounds.width, b.bounds.height);
         }
 
-        sr.rect(playerPosition.x, playerPosition.y, world.getPlayer().bounds.width, world.getPlayer().bounds.height);
-        sr.end();
+        shapeRenderer.rect(playerPosition.x, playerPosition.y, world.getPlayer().bounds.width, world.getPlayer().bounds.height);
+        shapeRenderer.end();
     }
 
     private void renderCoins(){
         TextureRegion coinFrame;
         for(Coin c : world.coins){
-            coinFrame = (TextureRegion) coin.getCoinAnimation().getKeyFrame(c.getStateTime(), true);
+            coinFrame = (TextureRegion) coinAnimation.getCoinAnimation().getKeyFrame(c.getStateTime(), true);
             batch.draw(coinFrame, c.position.x, c.position.y, Coin.WIDTH, Coin.HEIGHT);
         }
     }
@@ -82,8 +85,8 @@ public class RenderEngine {
     private void renderBirds(){
         TextureRegion birdFrame;
         for(Bird b : world.birds){
-            if(b.getState().equals(STATE_DEAD)) birdFrame = bird.getDieFrames();
-            else birdFrame = (TextureRegion) bird.getFlyAnimation().getKeyFrame(b.getStateTime(), true);
+            if(b.getState().equals(STATE_DEAD)) birdFrame = birdAnimation.getDieFrames();
+            else birdFrame = (TextureRegion) birdAnimation.getFlyAnimation().getKeyFrame(b.getStateTime(), true);
             int side = 1;
             if(b.getType() == TYPE_RIGHT) side = -1;
             batch.draw(birdFrame, b.position.x-Bird.WIDTH/2, b.position.y-Bird.HEIGHT/2,
@@ -112,20 +115,21 @@ public class RenderEngine {
         Player gamePlayer = world.getPlayer();
         switch(gamePlayer.getState()){
             case STATE_JUMP:
-                currentFrame = player.getJump();
+                currentFrame = playerAnimation.getJump();
                 break;
             case STATE_INGROUND:
-                currentFrame = (TextureRegion) player.getPlatformAnimation().getKeyFrame(gamePlayer.getStateTime(), false);
+                currentFrame = (TextureRegion) playerAnimation.getPlatformAnimation().getKeyFrame(gamePlayer.getStateTime(), false);
                 break;
             default:
-                currentFrame = player.getFall();
+                currentFrame = playerAnimation.getFall();
                 break;
         }
+
         if(gamePlayer.velocity.x > 0) side = 1;
         else if(gamePlayer.velocity.x < 0) side = -1;
         batch.draw(currentFrame, gamePlayer.position.x, gamePlayer.position.y,
                 (currentFrame.getRegionWidth()/30)/2, (currentFrame.getRegionHeight()/30)/2,
-                (currentFrame.getRegionWidth()/30), (currentFrame.getRegionHeight()/30), side * 1, 1, 0);
+                (currentFrame.getRegionWidth()/30), (currentFrame.getRegionHeight()/30), side, 1, 0);
 
     }
 

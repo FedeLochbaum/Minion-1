@@ -12,12 +12,12 @@ public class Bird extends com.mygdx.game.Entities.LogicEntities.MovementComponen
 
     public static final float WIDTH = 1.8f;
     public static final float HEIGHT = 1.5f;
-    public static final float VELOCITY = 3f;
+    private static final float VELOCITY = 3f;
 
-    BirdState state;
-    BirdType type;
+    private BirdState state;
+    private BirdType type;
 
-    float stateTime = 0;
+    private float stateTime = 0;
 
     public Bird(float x, float y, BirdType type){
         super(x, y, WIDTH, HEIGHT);

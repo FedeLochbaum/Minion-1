@@ -11,22 +11,20 @@ public class PlayerAnimation {
     @SuppressWarnings("unused")
     private static final int ROWS = 2;
 
-    Animation walkAnimation;
-    Animation platformAnimation;
+    private Animation walkAnimation;
+    private Animation platformAnimation;
 
-    TextureRegion[][] frames;
-    TextureRegion[] walkFrames;
-    TextureRegion standby;
-    TextureRegion jump;
-    TextureRegion fall;
-    TextureRegion[] platformFrames;
+    private TextureRegion[][] frames;
+    private TextureRegion[] walkFrames;
+    private TextureRegion standby;
+    private TextureRegion jump;
+    private TextureRegion fall;
+    private TextureRegion[] platformFrames;
 
     public PlayerAnimation(){
         frames = TextureRegion.split(Assets.getPlayer(), 72, 97);
         walkFrames = new TextureRegion[6];
-        for(int i=1; i < COLS; i++){
-            walkFrames[i-1] = frames[0][i];
-        }
+        System.arraycopy(frames[0], 1, walkFrames, 0, COLS - 1);
         walkAnimation = new Animation(0.2f, walkFrames);
         standby = frames[0][0];
         jump = frames[1][0];

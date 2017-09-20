@@ -7,9 +7,9 @@ import com.mygdx.game.Utils.Assets;
 
 public class BirdAnimation {
 
-    TextureRegion[] flyFrames;
-    TextureRegion dieFrames;
-    Animation flyAnimation;
+    private TextureRegion[] flyFrames;
+    private TextureRegion dieFrames;
+    private Animation flyAnimation;
 
     public BirdAnimation(){
         flyFrames = new TextureRegion[2];

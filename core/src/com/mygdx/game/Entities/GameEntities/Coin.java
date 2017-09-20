@@ -7,7 +7,7 @@ public class Coin extends com.mygdx.game.Entities.LogicEntities.TransformCompone
 
     public static final int POINTS = 10;
 
-    float stateTime;
+    private float stateTime;
 
     public Coin(float x, float y){
         super(x, y, WIDTH, HEIGHT);
