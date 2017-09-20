@@ -20,20 +20,20 @@ import static com.mygdx.game.Utils.Types.PlatformType.TYPE_STATIC;
 public class WorldEngine {
 
     public static final Vector2 gravity = new Vector2(0, -9.8f);
-    public static final float SCALE = 30;
 
     public static final float WIDTH = 16;
-    public static final float HEIGHT = 26 * 10;
+    private static final float HEIGHT = 26 * 10;
 
     private final Player player;
 
-    public final List<Platform> platforms;
-    public final List<Bird> birds;
-    public final List<Coin> coins;
-    public final Random rand;
+    final List<Platform> platforms;
+    final List<Bird> birds;
+    final List<Coin> coins;
+    private final Random rand;
 
     public int score = 0;
-    public float heightCam;
+
+    private float heightCam;
 
 
     public WorldEngine(){
@@ -45,6 +45,7 @@ public class WorldEngine {
         generateLevel();
         heightCam = 0;
     }
+
     public void update(float delta){
         updatePlayer(delta);
         updatePlatforms(delta);
@@ -52,16 +53,19 @@ public class WorldEngine {
         updateCoins(delta);
         checkCollisions();
     }
+
     private void checkCollisions(){
         platformsCollisions();
         birdsCollisions();
         coinsCollisions();
     }
+
     private void updatePlayer(float delta){
         player.update(delta);
         heightCam = Math.max(heightCam, player.position.y);
         playerDead();
     }
+
     private void updatePlatforms(float delta){
         for(Platform p : platforms){
             p.update(delta);
@@ -79,10 +83,13 @@ public class WorldEngine {
             c.update(delta);
         }
     }
+
     private void generateLevel(){
         float y = rand.nextFloat() * (6f - 5f) + 5f;
 
         while(y < HEIGHT) {
+
+            // Creacion de las plataformas
             PlatformType type;
 
             float r = rand.nextFloat();
@@ -96,11 +103,13 @@ public class WorldEngine {
             platforms.add(p);
 
 
+            //Creacion de las monedas en el medio de la plataforma
             if(rand.nextFloat() > 0.5f){
                 Coin c = new Coin(p.position.x+rand.nextFloat(), p.position.y+Coin.HEIGHT+rand.nextFloat()*3);
                 coins.add(c);
             }
 
+            //Creacion de los pajaros
             if(rand.nextFloat() > 0.5f){
                 BirdType birdType = BirdType.TYPE_LEFT;
                 if(rand.nextInt(2) == 2)
@@ -116,20 +125,11 @@ public class WorldEngine {
     }
 
     private void playerDead(){
-        if(heightCam - WorldEngine.HEIGHT/2 > player.position.y+player.HEIGHT) player.dead();
+        if(heightCam - WorldEngine.HEIGHT/2 > player.position.y + player.HEIGHT)
+            player.dead();
     }
 
-    private void birdsCollisions(){
-        for(Bird b : birds){
-            if(b.bounds.overlaps(player.bounds)){
-                if(player.position.y > b.position.y){
-                    player.hitBird();
-                    score = score*2;
-                }
-                else player.dead();
-            }
-        }
-    }
+
     private void platformsCollisions(){
         if(player.getState() == STATE_JUMP) return;
         for(Platform p : platforms){
@@ -141,6 +141,7 @@ public class WorldEngine {
             }
         }
     }
+
     private void coinsCollisions(){
         int size = coins.size();
         for(int i=0;i<size;i++){
@@ -149,6 +150,18 @@ public class WorldEngine {
                 score += Coin.POINTS;
                 coins.remove(c);
                 size = coins.size();
+            }
+        }
+    }
+
+    private void birdsCollisions(){
+        for(Bird b : birds){
+            if(b.bounds.overlaps(player.bounds)){
+                if(player.position.y > b.position.y){
+                    player.hitBird();
+                    score = score*2;
+                }
+                else player.dead();
             }
         }
     }

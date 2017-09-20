@@ -12,13 +12,13 @@ import static com.mygdx.game.Utils.States.PlayerState.STATE_JUMP;
 
 public class Player extends com.mygdx.game.Entities.LogicEntities.MovementComponent {
 
-    public static final float JUMP_VELOCITY = 11f;
-    public static final float WIDTH = 2.4f;
+    private static final float JUMP_VELOCITY = 15f;
+    private static final float WIDTH = 2.4f;
     public static final float HEIGHT = 3f;
 
-    PlayerState state;
+    private PlayerState state;
 
-    float stateTime = 0;
+    private float stateTime = 0;
 
     public Player(float x, float y){
         super(x,y,WIDTH,HEIGHT);

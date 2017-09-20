@@ -7,6 +7,7 @@ import com.mygdx.game.Utils.Assets;
 public class PlayerAnimation {
 
     private static final int COLS = 7;
+
     @SuppressWarnings("unused")
     private static final int ROWS = 2;
 

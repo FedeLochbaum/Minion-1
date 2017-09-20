@@ -23,30 +23,36 @@ public class GameScreen extends ScreenAdapter {
 
     private Minion game;
 
-    WorldEngine worldutil;
-    RenderEngine renderer;
-
+    WorldEngine worldEngine;
+    RenderEngine worldRenderer;
     OrthographicCamera camera;
+
     Vector3 touchPoint;
 
     GameState state;
 
     String scoreString;
 
+    Batch batch;
+
     Rectangle pauseRectangle;
     Rectangle resumeRectangle;
+
+
     Rectangle restartRectangle;
     Rectangle exitRectangle;
 
     public GameScreen(Minion gameM) {
         game = gameM;
 
+        batch = game.getBatch();
+
         camera = new OrthographicCamera(WIDTH,HEIGHT);
         camera.position.set(WIDTH/2,HEIGHT/2,0);
         touchPoint = new Vector3();
 
-        worldutil = new WorldEngine();
-        renderer = new RenderEngine(game.getBatch(), worldutil);
+        worldEngine = new WorldEngine();
+        worldRenderer = new RenderEngine(game.getBatch(), worldEngine);
 
         state = GAME_RUNNING;
 
@@ -54,18 +60,34 @@ public class GameScreen extends ScreenAdapter {
 
         pauseRectangle = new Rectangle(WIDTH-65, 1, 64, 64);
         resumeRectangle = new Rectangle(135, 470-(86/2), 209, 86);
+
         restartRectangle = new Rectangle(110, HEIGHT/2-(86/2), 260, 86);
         exitRectangle = new Rectangle(175, 330-(86/2), 137, 86);
+    }
+
+    @Override
+    public void render(float delta) {
+        update(delta);
+        draw();
+    }
+
+    public void update(float delta){
+        switch(state){
+            case GAME_RUNNING:
+                gameRunning(delta);
+                break;
+            case GAME_PAUSED:
+                gamePaused();
+                break;
+        }
     }
 
     public void draw(){
         GL20 gl = Gdx.gl;
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        renderer.render();
+        worldRenderer.render();
         camera.update();
-
-        Batch batch = game.getBatch();
 
         batch.setProjectionMatrix(camera.combined);
         batch.enableBlending();
@@ -81,17 +103,6 @@ public class GameScreen extends ScreenAdapter {
                 break;
         }
         batch.end();
-    }
-
-    public void update(float delta){
-        switch(state){
-            case GAME_RUNNING:
-                gameRunning(delta);
-                break;
-            case GAME_PAUSED:
-                gamePaused();
-                break;
-        }
     }
 
     public void gamePaused(){
@@ -119,12 +130,19 @@ public class GameScreen extends ScreenAdapter {
                 return;
             }
         }
-        worldutil.update(delta);
-        if(worldutil.getPlayer().getState() == PlayerState.STATE_DEAD) state = GAME_PAUSED;
+
+        worldEngine.update(delta);
+        if(isDead()) game.setScreen(new GameScreen(game));
+    }
+
+    private boolean isDead() {
+        return worldEngine.getPlayer().getState() == PlayerState.STATE_DEAD;
     }
 
     private void renderPauseMenu(){
         game.getBatch().draw(Assets.getResumeButton(), 135, 470-(86/2), 209, 86);
+        batch.draw(Assets.getRestartButton(), 110, HEIGHT/2-(86/2), 260, 86);
+        batch.draw(Assets.getExitButton(), 175, 330-(86/2), 137, 86);
     }
 
     private void renderPauseBt() {
@@ -132,16 +150,9 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void renderScore(){
-//        Assets.getFont().setScale(0.6f);
-        Assets.getFont().draw(game.getBatch(), scoreString + worldutil.score, 10, 750);
+        Assets.getFont().draw(game.getBatch(), scoreString + worldEngine.score, 10, 750);
     }
 
-    @Override
-    public void render(float delta) {
-        update(delta);
-        draw();
-
-    }
     @Override
     public void pause() {
         if(state == GAME_RUNNING) state = GAME_PAUSED;
